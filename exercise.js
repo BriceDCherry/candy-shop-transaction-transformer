@@ -6,10 +6,13 @@ function candySalesToObject(sales){
     }
 }
 
-function salesDayToObject(date){
-    return {
-        date: Object.keys(date),
-    }
+function salesDayToObject(date, sales){
+    return sales[date].reduce((a, b) => {
+        a.date = date
+        a.sales.push(candySalesToObject(b))
+        return a
+    }, {sales: []})
+        
 }
 
 module.exports = {
